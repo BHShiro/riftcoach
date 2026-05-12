@@ -2,69 +2,33 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>RiftCoach</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiftCoach | Wild Rift Meta</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-    <!-- HERO -->
-
     <section class="hero">
 
         <nav class="navbar">
+            <div class="logo">RiftCoach</div>
 
-            <div class="logo">
-                RiftCoach
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#">Inicio</a>
+                <a href="#features">Funciones</a>
+                <a href="#champions">Meta</a>
+                <a href="#videos">Videos</a>
             </div>
-
-            <!-- MOBILE MENU -->
-
-            <div
-                class="menu-toggle"
-                id="menu-toggle"
-            >
-                ☰
-            </div>
-
-            <div
-                class="nav-links"
-                id="nav-links"
-            >
-
-                <a href="#">
-                    Inicio
-                </a>
-
-                <a href="#features">
-                    Funciones
-                </a>
-
-                <a href="#champions">
-                    Meta
-                </a>
-
-                <a href="#videos">
-                    Videos
-                </a>
-
-            </div>
-
         </nav>
 
         <div class="hero-content">
-
             <div class="hero-text">
+
+                <span class="badge">Wild Rift Competitive Meta</span>
 
                 <h1>
                     Domina Wild Rift
@@ -72,109 +36,51 @@
                 </h1>
 
                 <p>
-                    Builds meta, counters, coach inteligente
-                    y análisis competitivo para subir elo.
+                    Builds meta, runas, spells, counters y análisis competitivo
+                    para subir elo.
                 </p>
 
                 <div class="buttons">
-
-                    <a
-                        href="#champions"
-                        class="btn primary"
-                    >
-                        Ver Meta
-                    </a>
-
-                    <a
-                        href="#features"
-                        class="btn secondary"
-                    >
-                        Explorar
-                    </a>
-
+                    <a href="#champions" class="btn primary">Ver Meta</a>
+                    <a href="#features" class="btn secondary">Explorar</a>
                 </div>
 
             </div>
-
         </div>
 
     </section>
 
-    <!-- FEATURES -->
-
-    <section
-        class="features"
-        id="features"
-    >
+    <section class="features" id="features">
 
         <div class="card">
-
-            <h3>
-                🎯 Coach Inteligente
-            </h3>
-
-            <p>
-                Consejos dinámicos según matchup.
-            </p>
-
+            <h3>🎯 Coach Inteligente</h3>
+            <p>Consejos dinámicos según matchup.</p>
         </div>
 
         <div class="card">
-
-            <h3>
-                🔥 Tier List
-            </h3>
-
-            <p>
-                Descubre el meta actual.
-            </p>
-
+            <h3>🔥 Tier List</h3>
+            <p>Descubre el meta actual.</p>
         </div>
 
         <div class="card">
-
-            <h3>
-                ⚔️ Counters
-            </h3>
-
-            <p>
-                Aprende matchups y counters.
-            </p>
-
+            <h3>⚔️ Counters</h3>
+            <p>Aprende matchups y counters.</p>
         </div>
 
         <div class="card">
-
-            <h3>
-                ❤️ Favoritos
-            </h3>
-
-            <p>
-                Guarda tus campeones favoritos.
-            </p>
-
+            <h3>❤️ Favoritos</h3>
+            <p>Guarda tus picks principales.</p>
         </div>
 
     </section>
 
-    <!-- CHAMPIONS -->
+    <section class="champions" id="champions">
 
-    <section
-        class="champions"
-        id="champions"
-    >
-
-        <h2>
-            🔥 Meta Champions
-        </h2>
+        <h2>🔥 Wild Rift Meta Champions</h2>
 
         <p class="section-subtitle">
-
             Los mejores campeones para subir elo.
-
         </p>
-
-        <!-- SEARCH -->
 
         <input
             type="text"
@@ -183,114 +89,45 @@
             placeholder="Buscar campeón..."
         >
 
-        <!-- FILTERS -->
-
         <div class="role-filters">
-
-            <button
-                class="filter-btn active"
-                data-role="all"
-            >
-                Todos
-            </button>
-
-            <button
-                class="filter-btn"
-                data-role="Top"
-            >
-                Top
-            </button>
-
-            <button
-                class="filter-btn"
-                data-role="Jungle"
-            >
-                Jungle
-            </button>
-
-            <button
-                class="filter-btn"
-                data-role="Mid"
-            >
-                Mid
-            </button>
-
-            <button
-                class="filter-btn"
-                data-role="ADC"
-            >
-                ADC
-            </button>
-
-            <button
-                class="filter-btn"
-                data-role="Support"
-            >
-                Support
-            </button>
-
+            <button class="filter-btn active" data-role="all">Todos</button>
+            <button class="filter-btn" data-role="Top">Top</button>
+            <button class="filter-btn" data-role="Jungle">Jungle</button>
+            <button class="filter-btn" data-role="Mid">Mid</button>
+            <button class="filter-btn" data-role="ADC">ADC</button>
+            <button class="filter-btn" data-role="Support">Support</button>
         </div>
 
-        <div
-            class="champion-grid"
-            id="champion-container"
-        >
-        </div>
+        <div class="champion-grid" id="champion-container"></div>
 
     </section>
 
-    <!-- VIDEOS -->
+    <section class="videos" id="videos">
 
-    <section
-        class="videos"
-        id="videos"
-    >
-
-        <h2>
-            🎥 RiftCoach Videos
-        </h2>
+        <h2>🎥 RiftCoach Academy</h2>
 
         <div class="video-grid">
 
             <div class="video-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    title="YouTube video"
-                    frameborder="0"
-                    allowfullscreen
-                >
-                </iframe>
-
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
             </div>
 
             <div class="video-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    title="YouTube video"
-                    frameborder="0"
-                    allowfullscreen
-                >
-                </iframe>
-
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
             </div>
 
         </div>
 
     </section>
 
-    <!-- DATA -->
+    <footer class="footer">
+        <p>RiftCoach • Wild Rift Meta Assistant</p>
+    </footer>
 
     <script src="data/runes.js"></script>
-
     <script src="data/spells.js"></script>
-
     <script src="data/items.js"></script>
-
     <script src="data/champions.js"></script>
-
-    <!-- MAIN -->
 
     <script src="script.js"></script>
 

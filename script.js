@@ -1,102 +1,58 @@
 console.log("RiftCoach Interactive UI 🚀");
 
 /* =========================
-   CONTAINER
+   ELEMENTS
 ========================= */
 
-const container =
-document.getElementById("champion-container");
-
-/* =========================
-   SEARCH
-========================= */
-
-const searchInput =
-document.getElementById("search-input");
+const container = document.getElementById("champion-container");
+const searchInput = document.getElementById("search-input");
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
 
 /* =========================
    MOBILE MENU
 ========================= */
 
-const menuToggle =
-document.getElementById("menu-toggle");
-
-const navLinks =
-document.getElementById("nav-links");
-
 menuToggle.addEventListener("click", () => {
-
     navLinks.classList.toggle("show-menu");
-
 });
 
 /* =========================
    FAVORITES
 ========================= */
 
-let favorites =
-JSON.parse(
-    localStorage.getItem("favorites")
-) || [];
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
 /* =========================
    FALLBACK IMAGE
 ========================= */
 
-function imageFallback(event){
-
-    event.target.src =
-    "assets/fallback.png";
-
+function imageFallback(event) {
+    event.target.src = "assets/fallback.png";
 }
 
 /* =========================
    RENDER CHAMPIONS
 ========================= */
 
-function renderChampions(data){
-
+function renderChampions(data) {
     container.innerHTML = "";
 
     data.forEach(champion => {
 
-        let tierClass = "";
+        let tierClass = "a";
 
-        if(champion.tier === "S+"){
+        if (champion.tier === "S+") tierClass = "splus";
+        else if (champion.tier === "S") tierClass = "s";
 
-            tierClass = "splus";
-
-        }
-
-        else if(champion.tier === "S"){
-
-            tierClass = "s";
-
-        }
-
-        else{
-
-            tierClass = "a";
-
-        }
-
-        const isFavorite =
-        favorites.includes(champion.name);
+        const isFavorite = favorites.includes(champion.name);
 
         container.innerHTML += `
-
             <div class="champion-card hidden">
 
-                <!-- FAVORITE -->
-
-                <div
-                    class="favorite-btn"
-                    data-name="${champion.name}"
-                >
+                <div class="favorite-btn" data-name="${champion.name}">
                     ${isFavorite ? "❤️" : "🤍"}
                 </div>
-
-                <!-- SPLASH -->
 
                 <img
                     class="champion-splash"
@@ -107,220 +63,98 @@ function renderChampions(data){
 
                 <div class="champion-info">
 
-                    <!-- NAME -->
+                    <h3>${champion.name}</h3>
 
-                    <h3>
-                        ${champion.name}
-                    </h3>
-
-                    <!-- ROLE -->
-
-                    <div class="role">
-                        ${champion.role}
-                    </div>
-
-                    <!-- TIER -->
+                    <div class="role">${champion.role}</div>
 
                     <span class="tier ${tierClass}">
                         ${champion.tier} Tier
                     </span>
 
-                    <!-- WINRATE -->
-
                     <div class="winrate-wrapper">
 
                         <div class="winrate-label">
-
                             WR ${champion.winrate}
-
                         </div>
 
                         <div class="winrate-bar">
-
                             <div
                                 class="winrate-fill"
-                                style="
-                                width:${champion.winrate};
-                                "
-                            >
-                            </div>
-
+                                style="width:${champion.winrate};"
+                            ></div>
                         </div>
 
                     </div>
 
-                    <!-- STATS -->
-
                     <div class="stats">
-
-                        <span>
-                            BR ${champion.banrate}
-                        </span>
-
+                        <span>BR ${champion.banrate}</span>
                     </div>
 
-                    <!-- DESCRIPTION -->
-
-                    <p>
-                        ${champion.description}
-                    </p>
-
-                    <!-- COUNTER -->
+                    <p>${champion.description}</p>
 
                     <div class="counter-box">
-
-                        Counter:
-                        ${champion.counter}
-
+                        Counter: ${champion.counter}
                     </div>
 
-                    <!-- BUILD BUTTON -->
-
                     <button class="btn secondary build-btn">
-
                         Ver Build
-
                     </button>
-
-                    <!-- BUILD CONTENT -->
 
                     <div class="build-content">
 
-                        <!-- ITEMS -->
-
                         <div class="build-section">
-
-                            <h4>
-                                Items
-                            </h4>
-
+                            <h4>Items</h4>
                             <div class="icon-row">
-
-                                ${champion.items.map(item => `
-
-                                    <div class="interactive-card">
-
-                                        <img
-                                            class="build-icon clickable"
-                                            src="${item.image}"
-                                            alt="${item.name}"
-                                            onerror="imageFallback(event)"
-                                        >
-
-                                        <div class="interactive-info">
-
-                                            <h5>
-                                                ${item.name}
-                                            </h5>
-
-                                            <p>
-                                                ${item.description}
-                                            </p>
-
-                                        </div>
-
-                                    </div>
-
-                                `).join("")}
-
+                                ${renderIcons(champion.items)}
                             </div>
-
                         </div>
 
-                        <!-- RUNES -->
-
                         <div class="build-section">
-
-                            <h4>
-                                Runas
-                            </h4>
-
+                            <h4>Runas</h4>
                             <div class="icon-row">
-
-                                ${champion.runes.map(rune => `
-
-                                    <div class="interactive-card">
-
-                                        <img
-                                            class="build-icon clickable"
-                                            src="${rune.image}"
-                                            alt="${rune.name}"
-                                            onerror="imageFallback(event)"
-                                        >
-
-                                        <div class="interactive-info">
-
-                                            <h5>
-                                                ${rune.name}
-                                            </h5>
-
-                                            <p>
-                                                ${rune.description}
-                                            </p>
-
-                                        </div>
-
-                                    </div>
-
-                                `).join("")}
-
+                                ${renderIcons(champion.runes)}
                             </div>
-
                         </div>
 
-                        <!-- SPELLS -->
-
                         <div class="build-section">
-
-                            <h4>
-                                Spells
-                            </h4>
-
+                            <h4>Spells</h4>
                             <div class="icon-row">
-
-                                ${champion.spells.map(spell => `
-
-                                    <div class="interactive-card">
-
-                                        <img
-                                            class="build-icon clickable"
-                                            src="${spell.image}"
-                                            alt="${spell.name}"
-                                            onerror="imageFallback(event)"
-                                        >
-
-                                        <div class="interactive-info">
-
-                                            <h5>
-                                                ${spell.name}
-                                            </h5>
-
-                                            <p>
-                                                ${spell.description}
-                                            </p>
-
-                                        </div>
-
-                                    </div>
-
-                                `).join("")}
-
+                                ${renderIcons(champion.spells)}
                             </div>
-
                         </div>
 
                     </div>
 
                 </div>
-
             </div>
-
         `;
-
     });
 
     initScrollAnimations();
+}
 
+/* =========================
+   ICON RENDER
+========================= */
+
+function renderIcons(list) {
+    return list.map(item => `
+        <div class="interactive-card">
+
+            <img
+                class="build-icon clickable"
+                src="${item.image}"
+                alt="${item.name}"
+                onerror="imageFallback(event)"
+            >
+
+            <div class="interactive-info">
+                <h5>${item.name}</h5>
+                <p>${item.description}</p>
+            </div>
+
+        </div>
+    `).join("");
 }
 
 /* =========================
@@ -328,125 +162,65 @@ function renderChampions(data){
 ========================= */
 
 searchInput.addEventListener("input", e => {
+    const value = e.target.value.toLowerCase();
 
-    const value =
-    e.target.value.toLowerCase();
-
-    const filtered =
-    champions.filter(champion =>
-
-        champion.name
-        .toLowerCase()
-        .includes(value)
-
+    const filtered = champions.filter(champion =>
+        champion.name.toLowerCase().includes(value)
     );
 
     renderChampions(filtered);
-
 });
 
 /* =========================
    FILTERS
 ========================= */
 
-const filterButtons =
-document.querySelectorAll(".filter-btn");
-
-filterButtons.forEach(button => {
+document.querySelectorAll(".filter-btn").forEach(button => {
 
     button.addEventListener("click", () => {
 
         document
-        .querySelector(".filter-btn.active")
-        .classList.remove("active");
+            .querySelector(".filter-btn.active")
+            .classList.remove("active");
 
         button.classList.add("active");
 
-        const role =
-        button.dataset.role;
+        const role = button.dataset.role;
 
-        if(role === "all"){
-
+        if (role === "all") {
             renderChampions(champions);
-
-        }
-
-        else{
-
-            const filtered =
-            champions.filter(champion =>
-                champion.role === role
+        } else {
+            renderChampions(
+                champions.filter(c => c.role === role)
             );
-
-            renderChampions(filtered);
-
         }
-
     });
-
 });
 
 /* =========================
-   BUILD TOGGLE
+   GLOBAL CLICK EVENTS
 ========================= */
 
 document.addEventListener("click", e => {
 
-    if(e.target.classList.contains("build-btn")){
-
-        const buildContent =
-        e.target.nextElementSibling;
-
-        buildContent.classList.toggle("show-build");
-
+    if (e.target.classList.contains("build-btn")) {
+        e.target.nextElementSibling.classList.toggle("show-build");
     }
 
-});
-
-/* =========================
-   INTERACTIVE INFO
-========================= */
-
-document.addEventListener("click", e => {
-
-    if(e.target.classList.contains("clickable")){
-
-        const card =
-        e.target.parentElement;
-
-        const info =
-        card.querySelector(".interactive-info");
-
-        info.classList.toggle("show-info");
-
+    if (e.target.classList.contains("clickable")) {
+        e.target.parentElement
+            .querySelector(".interactive-info")
+            .classList.toggle("show-info");
     }
 
-});
+    if (e.target.classList.contains("favorite-btn")) {
 
-/* =========================
-   FAVORITES
-========================= */
+        const championName = e.target.dataset.name;
 
-document.addEventListener("click", e => {
-
-    if(e.target.classList.contains("favorite-btn")){
-
-        const championName =
-        e.target.dataset.name;
-
-        if(favorites.includes(championName)){
-
-            favorites =
-            favorites.filter(name =>
-                name !== championName
-            );
-
-        }
-
-        else{
-
+        if (favorites.includes(championName)) {
+            favorites = favorites.filter(name => name !== championName);
+        } else {
             favorites.push(championName);
-
         }
 
         localStorage.setItem(
@@ -455,39 +229,30 @@ document.addEventListener("click", e => {
         );
 
         renderChampions(champions);
-
     }
-
 });
 
 /* =========================
    SCROLL ANIMATION
 ========================= */
 
-function initScrollAnimations(){
+function initScrollAnimations() {
 
-    const observer =
-    new IntersectionObserver(entries => {
-
+    const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-
-            if(entry.isIntersecting){
-
+            if (entry.isIntersecting) {
                 entry.target.classList.add("show");
-
             }
-
         });
-
     });
 
-    const hiddenElements =
-    document.querySelectorAll(".hidden");
-
-    hiddenElements.forEach(el => {
-
+    document.querySelectorAll(".hidden").forEach(el => {
         observer.observe(el);
-
     });
-
 }
+
+/* =========================
+   INIT
+========================= */
+
+renderChampions(champions);
